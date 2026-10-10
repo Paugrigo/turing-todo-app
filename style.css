@@ -74,6 +74,27 @@ h1 {
   border-bottom: none;
 }
 
+.todo-list label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.todo-list input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+.todo-list li.done span {
+  text-decoration: line-through;
+  color: #a1a1aa;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

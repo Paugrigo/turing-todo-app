@@ -27,7 +27,25 @@ function render() {
   list.innerHTML = '';
   for (const todo of todos) {
     const item = document.createElement('li');
-    item.textContent = todo.text;
+    if (todo.done) item.classList.add('done');
+
+    // Wrapping the checkbox in a label makes the text clickable too.
+    const label = document.createElement('label');
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = todo.done;
+    checkbox.addEventListener('change', () => {
+      todo.done = checkbox.checked;
+      item.classList.toggle('done', todo.done);
+      saveTodos();
+    });
+
+    const text = document.createElement('span');
+    text.textContent = todo.text;
+
+    label.append(checkbox, text);
+    item.appendChild(label);
     list.appendChild(item);
   }
 }
