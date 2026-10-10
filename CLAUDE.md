@@ -27,6 +27,7 @@ Core:
 - Mark done only via the checkbox (clicking the text does not toggle it)
 - Edit a task by clicking its text (Enter or click away saves, Escape cancels; saving empty text deletes the task)
 - Delete a task
+- Dark/light mode switch (follows the system setting until toggled; choice saved in `localStorage` under `theme`)
 - Tasks persist across page reloads
 
 ## Conventions
@@ -34,6 +35,8 @@ Core:
 - Store tasks in `localStorage` as a JSON array under a single key (e.g. `todos`). Each task: `{ id, text, done }`.
 - Wrap `localStorage` reads in `try/catch` and fall back to an empty list if data is missing or corrupt.
 - Load `script.js` with `defer` (or at the end of `<body>`) so the DOM exists when it runs.
+- The one exception is a tiny inline script in `<head>` that applies the saved theme before first paint, to avoid a flash of the wrong colours.
+- All colours are CSS custom properties on `:root`; dark mode only redefines them. Don't hard-code colours in component rules.
 - Use `textContent`, not `innerHTML`, when rendering user-entered text.
 - Use semantic HTML (`<form>`, `<button>`, `<ul>`, `<label>`) so the app is keyboard- and screen-reader-friendly.
 - Make the layout work on mobile widths.
