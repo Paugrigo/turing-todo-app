@@ -121,6 +121,36 @@ function startEditing(todo, item) {
   editInput.select();
 }
 
+// Theme: follows the system setting until the user flips the switch,
+// then their choice is saved and used from then on.
+const THEME_KEY = 'theme';
+const themeToggle = document.getElementById('theme-toggle');
+const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+function currentTheme() {
+  return document.documentElement.dataset.theme || (systemDark.matches ? 'dark' : 'light');
+}
+
+function updateToggle() {
+  themeToggle.setAttribute('aria-checked', String(currentTheme() === 'dark'));
+}
+
+themeToggle.addEventListener('click', () => {
+  const theme = currentTheme() === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = theme;
+  try {
+    localStorage.setItem(THEME_KEY, theme);
+  } catch {
+    // Storage unavailable — the theme still changes for this visit.
+  }
+  updateToggle();
+});
+
+// If the user hasn't picked a theme, keep the switch in sync with the system.
+systemDark.addEventListener('change', updateToggle);
+
+updateToggle();
+
 // A form submit fires on both Enter in the input and clicking Add.
 form.addEventListener('submit', (event) => {
   event.preventDefault();

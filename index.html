@@ -4,12 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To-Do</title>
+  <script>
+    // Apply a saved theme before the page paints, so there's no flash of the wrong colours.
+    try {
+      const theme = localStorage.getItem('theme');
+      if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+    } catch {}
+  </script>
   <link rel="stylesheet" href="./style.css">
   <script src="./script.js" defer></script>
 </head>
 <body>
   <main class="app">
-    <h1>To-Do</h1>
+    <header class="app-header">
+      <h1>To-Do</h1>
+      <button type="button" id="theme-toggle" class="theme-toggle" role="switch" aria-checked="false">
+        <span>Dark mode</span>
+        <span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span>
+      </button>
+    </header>
 
     <form id="todo-form" class="todo-form">
       <label for="todo-input" class="visually-hidden">New task</label>
