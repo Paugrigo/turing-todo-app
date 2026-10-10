@@ -45,7 +45,23 @@ function render() {
     text.textContent = todo.text;
 
     label.append(checkbox, text);
-    item.appendChild(label);
+
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'button';
+    deleteButton.className = 'delete-button';
+    deleteButton.textContent = 'Delete';
+    deleteButton.setAttribute('aria-label', `Delete task: ${todo.text}`);
+    deleteButton.addEventListener('click', () => {
+      todos = todos.filter((t) => t.id !== todo.id);
+      saveTodos();
+
+      // Move focus to a neighbouring task so keyboard users don't lose their place.
+      const neighbour = item.nextElementSibling || item.previousElementSibling;
+      item.remove();
+      (neighbour ? neighbour.querySelector('.delete-button') : input).focus();
+    });
+
+    item.append(label, deleteButton);
     list.appendChild(item);
   }
 }
