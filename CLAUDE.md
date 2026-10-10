@@ -24,6 +24,8 @@ Keep it to these three files unless the app grows enough to justify splitting.
 Core:
 - Add a task
 - Mark a task as done / not done
+- Mark done only via the checkbox (clicking the text does not toggle it)
+- Edit a task by clicking its text (Enter or click away saves, Escape cancels; saving empty text deletes the task)
 - Delete a task
 - Tasks persist across page reloads
 

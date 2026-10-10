@@ -77,15 +77,6 @@ h1 {
   border-bottom: none;
 }
 
-.todo-list label {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  cursor: pointer;
-}
-
 .todo-list input[type="checkbox"] {
   flex-shrink: 0;
   width: 18px;
@@ -95,9 +86,47 @@ h1 {
   cursor: pointer;
 }
 
-.todo-list li.done span {
+/* Looks like plain text, but is a button so it can be reached with Tab. */
+.task-text {
+  flex: 1;
+  min-width: 0;
+  padding: 0 4px;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  overflow-wrap: anywhere;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  cursor: text;
+}
+
+.task-text:hover {
+  background: #f4f4f5;
+}
+
+.task-text:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+}
+
+.todo-list li.done .task-text {
   text-decoration: line-through;
   color: #a1a1aa;
+}
+
+.edit-input {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 10px;
+  font: inherit;
+  border: 1px solid #2563eb;
+  border-radius: 6px;
+}
+
+.edit-input:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
 }
 
 .delete-button {
